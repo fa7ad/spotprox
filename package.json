@@ -1,0 +1,26 @@
+{
+  "name": "spotprox",
+  "version": "1.0.0",
+  "description": "Proxy server for spotify",
+  "main": "app.js",
+  "repository": "git@github.com:fa7ad/spotprox.git",
+  "author": "Fahad Hossain <8bit.demoncoder@gmail.com> (http://fahad.gq/)",
+  "license": "MIT",
+  "dependencies": {
+    "lodash": "^4.17.4",
+    "proxy-lists": "^1.11.1"
+  },
+  "scripts": {
+    "start": "node app",
+    "test": "standard app"
+  },
+  "bin": {
+    "spotprox": "./app.js"
+  },
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "devDependencies": {
+    "standard": "^10.0.2"
+  }
+}
