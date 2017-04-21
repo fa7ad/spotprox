@@ -1,14 +1,9 @@
 #!/usr/bin/env node
-const url = require('url')
+const fs = require('fs')
 const _ = require('lodash')
-const Express = require('express')
 const cp = require('child_process')
 const proxyFetcher = require('proxy-lists')
 
-const env = {
-  port: process.env.PORT || 4567,
-  host: process.env.HOST || '0.0.0.0'
-}
 const proxyOptions = {
   countries: ['us', 'ca'],
   protocols: ['http', 'https'],
@@ -17,36 +12,43 @@ const proxyOptions = {
 }
 let proxList = []
 
-const app = new Express()
 const fetchProxy = proxyFetcher.getProxies(proxyOptions)
 
-app.get('/', (req, res) => {
-  res.send('Make a GET request to /proxy.pac')
+console.log('Downloading proxy list...')
+fetchProxy.on('data', function (proxies) {
+  process.stdout.write('...')
+  proxList = _.concat(proxList, proxies.map(p => `${p.ipAddress}:${p.port}`))
+  if (proxList.length >= 100) {
+    this.emit('end')
+  }
 })
 
-app.get('/proxy.pac', (req, res) => {
-  res.type('application/x-ns-proxy-autoconfig')
-  res.send(String.raw`
-    function FindProxyForURL(url, host) {
-      return "PROXY ${_.sample(proxList)}; DIRECT";
-    }
-  `)
-})
+fetchProxy.once('end', function () {
+  process.stdout.write('DONE!')
+  const prefsFile = `${process.env.HOME}/.config/spotify/prefs`
+  const prefs = fs.readFileSync(prefsFile, 'utf8')
 
-app.listen(env.port, env.host, function() {
-  const listenAddr = this.address()
-  const serverURL = url.format({
-    protocol: 'http',
-    port: listenAddr.port,
-    hostname: listenAddr.address
-  })
+  if (prefs.search('network.proxy.mode') >= 0) {
+    cp.execFileSync('sed', [
+      '-i',
+      String.raw`s/^network.proxy.mode.*$/network.proxy.mode=2/g`,
+      prefsFile
+    ])
+  } else {
+    fs.appendFileSync(prefsFile, 'network.proxy.mode=2')
+  }
 
-  console.log(`SpotProx running on %s.`, serverURL)
-  console.log(`Set the proxy to ${serverURL}/proxy.pac`)
+  const selectProxy = _.sample(proxList);
+  if (prefs.search('network.proxy.addr') >= 0) {
+    cp.execFileSync('sed', [
+      '-i',
+      String.raw`s/^network.proxy.addr.*$/network.proxy.addr=${selectProxy}@http/g`,
+      prefsFile
+    ])
+  } else {
+    fs.appendFileSync(prefsFile, `network.proxy.addr=${selectedProxy}@http`)
+  }
 
-  fetchProxy.on('data', function(proxies) {
-     proxList = _.concat(proxList, proxies.map(p => `${p.ipAddress}:${p.port}`))
-  })
-
-  cp.execFile('spotify', function() {})
+  console.log('Launching spotify...')
+  cp.execFileSync('spotify')
 })

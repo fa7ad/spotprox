@@ -12,7 +12,7 @@
   },
   "scripts": {
     "start": "node app",
-    "test": "standard app"
+    "test": "standard app.js"
   },
   "bin": {
     "spotprox": "./app.js"
@@ -22,5 +22,8 @@
   },
   "devDependencies": {
     "standard": "^10.0.2"
-  }
+  },
+  "os": [
+    "linux"
+  ]
 }
