@@ -1,7 +1,7 @@
 {
   "name": "spotprox",
-  "version": "1.0.1",
-  "description": "Proxy server for spotify",
+  "version": "1.0.2",
+  "description": "Find proxy server for spotify",
   "main": "app.js",
   "repository": "git@github.com:fa7ad/spotprox.git",
   "author": "Fahad Hossain <8bit.demoncoder@gmail.com> (http://fahad.gq/)",

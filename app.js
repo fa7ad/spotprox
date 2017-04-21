@@ -16,15 +16,20 @@ const fetchProxy = proxyFetcher.getProxies(proxyOptions)
 
 console.log('Downloading proxy list...')
 fetchProxy.on('data', function (proxies) {
-  process.stdout.write('...')
+  process.stdout.clearLine();
+  process.stdout.cursorTo(0);
+
   proxList = _.concat(proxList, proxies.map(p => `${p.ipAddress}:${p.port}`))
   if (proxList.length >= 100) {
     this.emit('end')
+    return
+  } else {
+    process.stdout.write('...')
   }
 })
 
 fetchProxy.once('end', function () {
-  process.stdout.write('DONE!')
+  console.log('DONE!')
   const prefsFile = `${process.env.HOME}/.config/spotify/prefs`
   const prefs = fs.readFileSync(prefsFile, 'utf8')
 
@@ -38,7 +43,7 @@ fetchProxy.once('end', function () {
     fs.appendFileSync(prefsFile, 'network.proxy.mode=2')
   }
 
-  const selectProxy = _.sample(proxList);
+  const selectProxy = _.sample(proxList)
   if (prefs.search('network.proxy.addr') >= 0) {
     cp.execFileSync('sed', [
       '-i',
@@ -46,9 +51,12 @@ fetchProxy.once('end', function () {
       prefsFile
     ])
   } else {
-    fs.appendFileSync(prefsFile, `network.proxy.addr=${selectedProxy}@http`)
+    fs.appendFileSync(prefsFile, `network.proxy.addr=${selectProxy}@http`)
   }
 
-  console.log('Launching spotify...')
-  cp.execFileSync('spotify')
+  process.stdout.write('Launching spotify...')
+  cp.execFile('spotify', function () {
+    console.log('Closed Spotify.')
+    process.exit()
+  })
 })
