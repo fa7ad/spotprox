@@ -30,7 +30,13 @@ fetchProxy.on('data', function (proxies) {
 
 fetchProxy.once('end', function () {
   console.log('DONE!')
-  const prefsFile = `${process.env.HOME}/.config/spotify/prefs`
+  const prefsDir = `${process.env.HOME}/.config/spotify`
+  const prefsFile = `${prefsDir}/prefs`
+
+  if (!fs.existsSync(prefsFile)) {
+    cp.execFileSync('mkdir', ['-p', prefsDir])
+    cp.execFileSync('touch', prefsFile)
+  }
   const prefs = fs.readFileSync(prefsFile, 'utf8')
 
   if (prefs.search('network.proxy.mode') >= 0) {
@@ -47,11 +53,11 @@ fetchProxy.once('end', function () {
   if (prefs.search('network.proxy.addr') >= 0) {
     cp.execFileSync('sed', [
       '-i',
-      String.raw`s/^network.proxy.addr.*$/network.proxy.addr=${selectProxy}@http/g`,
+      String.raw`s/^network.proxy.addr.*$/network.proxy.addr="${selectProxy}@http"/g`,
       prefsFile
     ])
   } else {
-    fs.appendFileSync(prefsFile, `network.proxy.addr=${selectProxy}@http`)
+    fs.appendFileSync(prefsFile, `network.proxy.addr="${selectProxy}@http"`)
   }
 
   process.stdout.write('Launching spotify...')
