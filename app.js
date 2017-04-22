@@ -16,16 +16,21 @@ const fetchProxy = proxyFetcher.getProxies(proxyOptions)
 
 console.log('Downloading proxy list...')
 fetchProxy.on('data', function (proxies) {
-  process.stdout.clearLine();
-  process.stdout.cursorTo(0);
+  process.stdout.clearLine()
+  process.stdout.cursorTo(0)
 
   proxList = _.concat(proxList, proxies.map(p => `${p.ipAddress}:${p.port}`))
   if (proxList.length >= 100) {
-    this.emit('end')
-    return
+    return this.emit('end')
   } else {
     process.stdout.write('...')
   }
+})
+
+fetchProxy.on('error', function (err) {
+  process.stderr.write(err.toString())
+  process.stdout.cursorTo(0)
+  process.stdout.write('*')
 })
 
 fetchProxy.once('end', function () {
