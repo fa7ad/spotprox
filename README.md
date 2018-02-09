@@ -13,8 +13,8 @@ Requirements
 ---
 * A decent Linux distro (I use **Arch**, but **Debian/Ubuntu** works too)
 * [Spotify Linux App](https://www.spotify.com/download/linux/)
-* sed (usually built in)
-* touch (also built in)
+* ~~sed (usually built in)~~
+* ~~touch (also built in)~~
 
 Usage
 ---
