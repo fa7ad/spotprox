@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 const fs = require('fs')
-const _ = require('lodash')
+const path = require('path')
+const $ = require('shelljs')
 const cp = require('child_process')
+const _sample = require('lodash/sample')
 const proxyFetcher = require('proxy-lists')
 
 const proxyOptions = {
@@ -19,12 +21,8 @@ fetchProxy.on('data', function (proxies) {
   process.stdout.clearLine()
   process.stdout.cursorTo(0)
 
-  proxList = _.concat(proxList, proxies.map(p => `${p.ipAddress}:${p.port}`))
-  if (proxList.length >= 100) {
-    return this.emit('end')
-  } else {
-    process.stdout.write('...')
-  }
+  proxList = proxList.concat(proxies.map(p => `${p.ipAddress}:${p.port}`))
+  process.stdout.write('...')
 })
 
 fetchProxy.on('error', function (err) {
@@ -35,32 +33,29 @@ fetchProxy.on('error', function (err) {
 
 fetchProxy.once('end', function () {
   console.log('DONE!')
-  const prefsDir = `${process.env.HOME}/.config/spotify`
-  const prefsFile = `${prefsDir}/prefs`
+  const config = path.join(process.env.HOME, '.config', 'spotify')
+  const prefsFile = path.join(config, 'prefs')
 
   if (!fs.existsSync(prefsFile)) {
-    cp.execFileSync('mkdir', ['-p', prefsDir])
-    cp.execFileSync('touch', prefsFile)
+    $.mkdir('-p', config)
+    $.touch(prefsFile)
   }
   const prefs = fs.readFileSync(prefsFile, 'utf8')
 
   if (prefs.search('network.proxy.mode') >= 0) {
-    cp.execFileSync('sed', [
-      '-i',
-      String.raw`s/^network.proxy.mode.*$/network.proxy.mode=2/g`,
-      prefsFile
-    ])
+    $.sed('-i', /^network.proxy.mode.*$/, 'network.proxy.mode=2', prefsFile)
   } else {
     fs.appendFileSync(prefsFile, 'network.proxy.mode=2')
   }
 
-  const selectProxy = _.sample(proxList)
+  const selectProxy = _sample(proxList)
   if (prefs.search('network.proxy.addr') >= 0) {
-    cp.execFileSync('sed', [
+    $.sed(
       '-i',
-      String.raw`s/^network.proxy.addr.*$/network.proxy.addr="${selectProxy}@http"/g`,
+      /^network.proxy.addr.*$/,
+      `network.proxy.addr="${selectProxy}@http"`,
       prefsFile
-    ])
+    )
   } else {
     fs.appendFileSync(prefsFile, `network.proxy.addr="${selectProxy}@http"`)
   }

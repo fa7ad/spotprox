@@ -8,7 +8,8 @@
   "license": "MIT",
   "dependencies": {
     "lodash": "^4.17.4",
-    "proxy-lists": "^1.11.1"
+    "proxy-lists": "^1.11.1",
+    "shelljs": "^0.8.1"
   },
   "scripts": {
     "start": "node app",
