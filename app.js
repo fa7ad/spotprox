@@ -7,7 +7,7 @@ const _sample = require('lodash/sample')
 const proxyFetcher = require('proxy-lists')
 
 const proxyOptions = {
-  countries: ['us', 'ca'],
+  countries: ['us'],
   protocols: ['http', 'https'],
   ipTypes: ['ipv4'],
   sourcesBlackList: ['bitproxies', 'kingproxies', 'blackhatworld']
@@ -20,6 +20,8 @@ console.log('Downloading proxy list...')
 fetchProxy.on('data', function (proxies) {
   process.stdout.clearLine()
   process.stdout.cursorTo(0)
+
+  if (proxList.length > 150) return
 
   proxList = proxList.concat(proxies.map(p => `${p.ipAddress}:${p.port}`))
   process.stdout.write('...')
@@ -48,7 +50,7 @@ fetchProxy.once('end', function () {
     fs.appendFileSync(prefsFile, 'network.proxy.mode=2')
   }
 
-  const selectProxy = _sample(proxList)
+  const selectProxy = _sample(proxList.filter(x => !/3128/.test(x)))
   if (prefs.search('network.proxy.addr') >= 0) {
     $.sed(
       '-i',
