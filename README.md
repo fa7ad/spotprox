@@ -1,18 +1,18 @@
 spotprox
 ===
 
-Finds & uses a random US or Canadian proxy server for Spotify.
+Finds & uses a random US ~~or Canadian~~ proxy server for Spotify.
 
 Warning!
 ---
-For now this script uses Synchronous calls and works only on Linux.
+For now this script uses Synchronous calls ~~and works only on Linux~~.
 I will update as soon as I get more time.
 
 
 Requirements
 ---
 * A decent Linux distro (I use **Arch**, but **Debian/Ubuntu** works too)
-* [Spotify Linux App](https://www.spotify.com/download/linux/)
+* [Spotify ~~Linux~~ App](https://www.spotify.com/)
 * ~~sed (usually built in)~~
 * ~~touch (also built in)~~
 
