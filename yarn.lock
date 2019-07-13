@@ -259,12 +259,12 @@ chardet@^0.7.0:
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/chardet/-/chardet-0.7.0.tgz#90094849f0937f2eedc2425d0d28a9e5f0cbad9e"
 
-cheerio@1.0.0-rc.2:
-  version "1.0.0-rc.2"
-  resolved "https://registry.yarnpkg.com/cheerio/-/cheerio-1.0.0-rc.2.tgz#4b9f53a81b27e4d5dac31c0ffd0cfa03cc6830db"
+cheerio@1.0.0-rc.3:
+  version "1.0.0-rc.3"
+  resolved "https://registry.yarnpkg.com/cheerio/-/cheerio-1.0.0-rc.3.tgz#094636d425b2e9c0f4eb91a46c05630c9a1a8bf6"
   dependencies:
     css-select "~1.2.0"
-    dom-serializer "~0.1.0"
+    dom-serializer "~0.1.1"
     entities "~1.1.1"
     htmlparser2 "^3.9.1"
     lodash "^4.15.0"
@@ -296,13 +296,9 @@ combined-stream@^1.0.6, combined-stream@~1.0.6:
   dependencies:
     delayed-stream "~1.0.0"
 
-commander@2.17.1:
-  version "2.17.1"
-  resolved "https://registry.yarnpkg.com/commander/-/commander-2.17.1.tgz#bd77ab7de6de94205ceacc72f1716d29f20a77bf"
-
-commander@2.19.0:
-  version "2.19.0"
-  resolved "https://registry.yarnpkg.com/commander/-/commander-2.19.0.tgz#f6198aa84e5b83c46054b94ddedbfed5ee9ff12a"
+commander@2.20.0:
+  version "2.20.0"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-2.20.0.tgz#d58bb2b5c1ee8f87b0d340027e9e94e222c5a422"
 
 concat-map@0.0.1:
   version "0.0.1"
@@ -354,17 +350,18 @@ dashdash@^1.12.0:
   dependencies:
     assert-plus "^1.0.0"
 
-data-sourcer@1.7.1:
-  version "1.7.1"
-  resolved "https://registry.yarnpkg.com/data-sourcer/-/data-sourcer-1.7.1.tgz#da7f8c3ffa7ceb4062f2c637e472f0c7fd4f451b"
+data-sourcer@1.7.2:
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/data-sourcer/-/data-sourcer-1.7.2.tgz#8f2a305826a87c1d6e3dafa31c1e906d67d4cdad"
   dependencies:
     async "3.1.0"
-    debug "4.1.0"
+    debug "4.1.1"
     feedparser "2.2.9"
+    mkdirp "0.5.1"
     puppeteer "1.18.1"
     request "2.88.0"
     underscore "1.9.1"
-    user-agents "1.0.308"
+    user-agents "1.0.314"
     xml2js "0.4.19"
 
 debug-log@^1.0.0:
@@ -377,9 +374,9 @@ debug@2.6.9, debug@^2.6.8, debug@^2.6.9:
   dependencies:
     ms "2.0.0"
 
-debug@4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/debug/-/debug-4.1.0.tgz#373687bffa678b38b1cd91f861b63850035ddc87"
+debug@4.1.1, debug@^4.0.1, debug@^4.1.0:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/debug/-/debug-4.1.1.tgz#3b72260255109c6b589cee050f1d516139664791"
   dependencies:
     ms "^2.1.1"
 
@@ -388,12 +385,6 @@ debug@^3.1.0:
   resolved "https://registry.yarnpkg.com/debug/-/debug-3.1.0.tgz#5bb5a0672628b64149566ba16819e61518c67261"
   dependencies:
     ms "2.0.0"
-
-debug@^4.0.1, debug@^4.1.0:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/debug/-/debug-4.1.1.tgz#3b72260255109c6b589cee050f1d516139664791"
-  dependencies:
-    ms "^2.1.1"
 
 deep-is@~0.1.3:
   version "0.1.3"
@@ -450,12 +441,19 @@ doctrine@^3.0.0:
   dependencies:
     esutils "^2.0.2"
 
-dom-serializer@0, dom-serializer@~0.1.0:
+dom-serializer@0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/dom-serializer/-/dom-serializer-0.1.0.tgz#073c697546ce0780ce23be4a28e293e40bc30c82"
   dependencies:
     domelementtype "~1.1.1"
     entities "~1.1.1"
+
+dom-serializer@~0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/dom-serializer/-/dom-serializer-0.1.1.tgz#1ec4059e284babed36eec2941d4a970a189ce7c0"
+  dependencies:
+    domelementtype "^1.3.0"
+    entities "^1.1.1"
 
 domelementtype@1, domelementtype@^1.3.0:
   version "1.3.0"
@@ -871,13 +869,13 @@ functional-red-black-tree@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/functional-red-black-tree/-/functional-red-black-tree-1.0.1.tgz#1b0ab3bd553b2a0d6399d29c0e3ea0b252078327"
 
-geoip-native-lite@0.3.1:
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/geoip-native-lite/-/geoip-native-lite-0.3.1.tgz#150b44e6daa1fea9d292b01b0d2fb9921cd479d2"
+geoip-native-lite@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/geoip-native-lite/-/geoip-native-lite-1.0.0.tgz#d7b2d79de3214039859eea0a7ab579bd9c563919"
   dependencies:
     async "3.1.0"
-    commander "2.17.1"
-    ip-address "5.8.9"
+    commander "2.20.0"
+    ip-address "5.9.2"
     lazy "1.0.11"
     mkdirp "0.5.1"
     underscore "1.9.1"
@@ -1061,17 +1059,13 @@ interpret@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/interpret/-/interpret-1.1.0.tgz#7ed1b1410c6a0e0f78cf95d3b8440c63f78b8614"
 
-ip-address@5.8.9:
-  version "5.8.9"
-  resolved "https://registry.yarnpkg.com/ip-address/-/ip-address-5.8.9.tgz#6379277c23fc5adb20511e4d23ec2c1bde105dfd"
+ip-address@5.9.2:
+  version "5.9.2"
+  resolved "https://registry.yarnpkg.com/ip-address/-/ip-address-5.9.2.tgz#8e7d2dab5cbf3cbf34e1f730ec6913f55fec8c74"
   dependencies:
     jsbn "1.1.0"
-    lodash.find "^4.6.0"
-    lodash.max "^4.0.1"
-    lodash.merge "^4.6.0"
-    lodash.padstart "^4.6.1"
-    lodash.repeat "^4.1.0"
-    sprintf-js "1.1.0"
+    lodash "^4.17.11"
+    sprintf-js "1.1.2"
 
 is-arrayish@^0.2.1:
   version "0.2.1"
@@ -1266,10 +1260,6 @@ lodash.clonedeep@^4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/lodash.clonedeep/-/lodash.clonedeep-4.5.0.tgz#e23f3f9c4f8fbdde872529c1071857a086e5ccef"
 
-lodash.find@^4.6.0:
-  version "4.6.0"
-  resolved "https://registry.yarnpkg.com/lodash.find/-/lodash.find-4.6.0.tgz#cb0704d47ab71789ffa0de8b97dd926fb88b13b1"
-
 lodash.get@^4.4.2:
   version "4.4.2"
   resolved "https://registry.yarnpkg.com/lodash.get/-/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
@@ -1277,22 +1267,6 @@ lodash.get@^4.4.2:
 lodash.has@^4.5.2:
   version "4.5.2"
   resolved "https://registry.yarnpkg.com/lodash.has/-/lodash.has-4.5.2.tgz#d19f4dc1095058cccbe2b0cdf4ee0fe4aa37c862"
-
-lodash.max@^4.0.1:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/lodash.max/-/lodash.max-4.0.1.tgz#8735566c618b35a9f760520b487ae79658af136a"
-
-lodash.merge@^4.6.0:
-  version "4.6.1"
-  resolved "https://registry.yarnpkg.com/lodash.merge/-/lodash.merge-4.6.1.tgz#adc25d9cb99b9391c59624f379fbba60d7111d54"
-
-lodash.padstart@^4.6.1:
-  version "4.6.1"
-  resolved "https://registry.yarnpkg.com/lodash.padstart/-/lodash.padstart-4.6.1.tgz#d2e3eebff0d9d39ad50f5cbd1b52a7bce6bb611b"
-
-lodash.repeat@^4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/lodash.repeat/-/lodash.repeat-4.1.0.tgz#fc7de8131d8c8ac07e4b49f74ffe829d1f2bec44"
 
 lodash.uniq@^4.5.0:
   version "4.5.0"
@@ -1637,17 +1611,16 @@ proxy-from-env@^1.0.0:
   resolved "https://registry.yarnpkg.com/proxy-from-env/-/proxy-from-env-1.0.0.tgz#33c50398f70ea7eb96d21f7b817630a55791c7ee"
 
 proxy-lists@^1.11.1:
-  version "1.17.0"
-  resolved "https://registry.yarnpkg.com/proxy-lists/-/proxy-lists-1.17.0.tgz#327acd218b7bce7516eb7de89db85095e0ddac09"
+  version "1.18.0"
+  resolved "https://registry.yarnpkg.com/proxy-lists/-/proxy-lists-1.18.0.tgz#773dd29290678529238fff9aee6e72b697c51eff"
   dependencies:
     async "3.1.0"
-    cheerio "1.0.0-rc.2"
-    commander "2.19.0"
-    data-sourcer "1.7.1"
-    geoip-native-lite "0.3.1"
+    cheerio "1.0.0-rc.3"
+    commander "2.20.0"
+    data-sourcer "1.7.2"
+    geoip-native-lite "1.0.0"
     request "2.88.0"
     underscore "1.9.1"
-    user-agents "1.0.306"
     xml2js "0.4.19"
 
 psl@^1.1.24:
@@ -1870,9 +1843,9 @@ spdx-license-ids@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/spdx-license-ids/-/spdx-license-ids-3.0.0.tgz#7a7cd28470cc6d3a1cfe6d66886f6bc430d3ac87"
 
-sprintf-js@1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.1.0.tgz#cffcaf702daf65ea39bb4e0fa2b299cec1a1be46"
+sprintf-js@1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.1.2.tgz#da1765262bf8c0f571749f2ad6c26300207ae673"
 
 sprintf-js@~1.0.2:
   version "1.0.3"
@@ -2048,16 +2021,9 @@ uri-js@^4.2.2:
   dependencies:
     punycode "^2.1.0"
 
-user-agents@1.0.306:
-  version "1.0.306"
-  resolved "https://registry.yarnpkg.com/user-agents/-/user-agents-1.0.306.tgz#77d4ae4506330ce7ff21b0f364d9c16b4076e14b"
-  dependencies:
-    dot-json "^1.1.0"
-    lodash.clonedeep "^4.5.0"
-
-user-agents@1.0.308:
-  version "1.0.308"
-  resolved "https://registry.yarnpkg.com/user-agents/-/user-agents-1.0.308.tgz#336471d4120ee8877f1579de662227c2d7250c3f"
+user-agents@1.0.314:
+  version "1.0.314"
+  resolved "https://registry.yarnpkg.com/user-agents/-/user-agents-1.0.314.tgz#4b88c5d65c2042f7e03adf14efa4720f09c038c3"
   dependencies:
     dot-json "^1.1.0"
     lodash.clonedeep "^4.5.0"
