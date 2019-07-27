@@ -350,9 +350,9 @@ dashdash@^1.12.0:
   dependencies:
     assert-plus "^1.0.0"
 
-data-sourcer@1.7.2:
-  version "1.7.2"
-  resolved "https://registry.yarnpkg.com/data-sourcer/-/data-sourcer-1.7.2.tgz#8f2a305826a87c1d6e3dafa31c1e906d67d4cdad"
+data-sourcer@1.8.1:
+  version "1.8.1"
+  resolved "https://registry.yarnpkg.com/data-sourcer/-/data-sourcer-1.8.1.tgz#f00864181be768365eef4a729b45f96675ab4389"
   dependencies:
     async "3.1.0"
     debug "4.1.1"
@@ -1607,13 +1607,13 @@ proxy-from-env@^1.0.0:
   resolved "https://registry.yarnpkg.com/proxy-from-env/-/proxy-from-env-1.0.0.tgz#33c50398f70ea7eb96d21f7b817630a55791c7ee"
 
 proxy-lists@^1.11.1:
-  version "1.18.0"
-  resolved "https://registry.yarnpkg.com/proxy-lists/-/proxy-lists-1.18.0.tgz#773dd29290678529238fff9aee6e72b697c51eff"
+  version "1.19.0"
+  resolved "https://registry.yarnpkg.com/proxy-lists/-/proxy-lists-1.19.0.tgz#567de32a08f34541c2108135c5ed8918ccdc0b90"
   dependencies:
     async "3.1.0"
     cheerio "1.0.0-rc.3"
     commander "2.20.0"
-    data-sourcer "1.7.2"
+    data-sourcer "1.8.1"
     geoip-native-lite "1.0.0"
     request "2.88.0"
     underscore "1.9.1"
