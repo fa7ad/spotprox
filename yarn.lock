@@ -1266,11 +1266,7 @@ lodash.uniq@^4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
 
-lodash@^4.15.0, lodash@^4.17.11, lodash@^4.17.12, lodash@^4.17.4:
-  version "4.17.15"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
-
-lodash@^4.17.14:
+lodash@^4.15.0, lodash@^4.17.11, lodash@^4.17.12, lodash@^4.17.14, lodash@^4.17.4:
   version "4.17.15"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
 
@@ -1601,8 +1597,8 @@ proxy-from-env@^1.0.0:
   resolved "https://registry.yarnpkg.com/proxy-from-env/-/proxy-from-env-1.0.0.tgz#33c50398f70ea7eb96d21f7b817630a55791c7ee"
 
 proxy-lists@^1.11.1:
-  version "1.19.0"
-  resolved "https://registry.yarnpkg.com/proxy-lists/-/proxy-lists-1.19.0.tgz#567de32a08f34541c2108135c5ed8918ccdc0b90"
+  version "1.20.0"
+  resolved "https://registry.yarnpkg.com/proxy-lists/-/proxy-lists-1.20.0.tgz#e968d06f72a13f038358d26707a0028052b1dcf2"
   dependencies:
     async "3.1.0"
     cheerio "1.0.0-rc.3"
