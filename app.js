@@ -1,77 +1,96 @@
 #!/usr/bin/env node
-const fs = require('fs')
-const opn = require('opn')
-const path = require('path')
-const $ = require('shelljs')
-const _sample = require('lodash/sample')
-const proxyFetcher = require('proxy-lists')
+import $ from 'shelljs'
+import open from 'open'
+import { join } from 'path'
+import { existsSync } from 'fs'
+import { sample } from 'lodash-es'
+import ProxyLists from 'proxy-lists'
+import { readFile, appendFile } from 'fs/promises'
 
-const proxyOptions = {
-  countries: ['us'],
-  protocols: ['http'],
-  ipTypes: ['ipv4'],
-  sourcesBlackList: ['bitproxies', 'kingproxies']
-}
-let proxList = []
+/**
+ * Get a list of proxies from proxy-lists
+ * @returns {Promise<string[]>} proxies
+ */
+const getProxies = () => new Promise((resolve, reject) => {
+  const proxyOptions = {
+    countries: ['us'],
+    protocols: ['http'],
+    ipTypes: ['ipv4'],
+    sourcesBlackList: ['bitproxies', 'kingproxies']
+  }
 
-const fetchProxy = proxyFetcher.getProxies(proxyOptions)
+  const proxList = []
 
-console.log('Downloading proxy list...')
-fetchProxy.on('data', function (proxies) {
-  if (proxList.length > 50) return this.emit('end')
-  proxList.push(...proxies.map(p => `${p.ipAddress}:${p.port}`))
-  process.stdout.write('*')
+  ProxyLists.getProxies(proxyOptions)
+    .on('data', function (proxies) {
+      if (proxList.length > 50) return this.emit('end')
+      proxies.forEach(proxy => {
+        if (proxy.port !== 3128) {
+          proxList.push(`${proxy.ipAddress}:${proxy.port}`)
+        }
+      })
+    })
+    .on('error', function () {
+      if (proxList.length > 50) this.emit('end')
+    })
+    .on('end', function () {
+      if (proxList.length > 10) return resolve(proxList)
+      reject(new Error("Couldn't get proxies"))
+    })
 })
 
-fetchProxy.on('error', function () {
-  process.stdout.write('x')
-  if (proxList.length > 50) this.emit('end')
-})
-
-fetchProxy.once('end', function () {
-  console.log('DONE!')
-  let config
+const getSpotifyConfigPath = () => {
   if (process.platform === 'win32') {
-    config = path.join(process.env.APPDATA, 'spotify')
+    return join(process.env.APPDATA, 'spotify')
   } else if (process.platform === 'darwin') {
-    config = path.join(
-      process.env.USER,
+    return join(
+      process.env.HOME,
       'Library',
       'Application Support',
       'Spotify'
     )
   } else {
-    config = path.join(process.env.HOME, '.config', 'spotify')
+    return join(process.env.HOME, '.config', 'spotify')
   }
-  const prefsFile = path.join(config, 'prefs')
+}
 
-  if (!fs.existsSync(prefsFile)) {
-    $.mkdir('-p', config)
-    $.touch(prefsFile)
+async function main () {
+  console.log('Downloading proxy list...')
+  const proxies = await getProxies()
+  console.log('Downloaded proxy list')
+
+  const configDir = getSpotifyConfigPath()
+  const configFile = join(configDir, 'prefs')
+
+  if (!existsSync(configDir)) {
+    $.mkdir('-p', configDir)
+    $.touch(configFile)
   }
-  const prefs = fs.readFileSync(prefsFile, 'utf8')
+
+  const prefs = await readFile(configFile, 'utf8')
 
   if (prefs.search('network.proxy.mode') > -1) {
-    $.sed('-i', /^network.proxy.mode.*$/, 'network.proxy.mode=2', prefsFile)
+    $.sed('-i', /^network.proxy.mode.*$/, 'network.proxy.mode=2', configFile)
   } else {
-    fs.appendFileSync(prefsFile, 'network.proxy.mode=2')
+    await appendFile(configFile, 'network.proxy.mode=2')
   }
 
-  const selectProxy = _sample(proxList.filter(x => !/3128/.test(x)))
+  const selectProxy = sample(proxies)
+
   if (prefs.search('network.proxy.addr') >= 0) {
     $.sed(
       '-i',
       /^network.proxy.addr.*$/,
       `network.proxy.addr="${selectProxy}@http"`,
-      prefsFile
+      configFile
     )
   } else {
-    fs.appendFileSync(prefsFile, `network.proxy.addr="${selectProxy}@http"`)
+    await appendFile(configFile, `network.proxy.addr="${selectProxy}@http"`)
   }
 
-  process.stdout.write('Launching spotify...')
+  console.log('Launching spotify...')
 
-  opn('', {
-    app: 'spotify'
-  }).then(process.exit)
-})
+  return open.openApp('spotify')
+}
+
+main().then(process.exit)

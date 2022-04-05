@@ -1,38 +1,42 @@
-spotprox
-===
+# spotprox
 
-Finds & uses a random US ~~or Canadian~~ proxy server for Spotify.
+Finds & uses a random US proxy server for Spotify; mainly useful for using Spotify in countries where it is not available officially. If Spotify is available in your country, do not use this.
 
-Warning!
----
-For now this script uses Synchronous calls ~~and works only on Linux~~.
-I will update as soon as I get more time.
+## Warning!
 
+This has only been tested on Linux and MacOS, it should also work on Windows but I am unable to test on Windows and therefore can not confidently state that it does work.
 
-Requirements
----
-* A decent Linux distro (I use **Arch**, but **Debian/Ubuntu** works too)
-* [Spotify ~~Linux~~ App](https://www.spotify.com/)
-* ~~sed (usually built in)~~
-* ~~touch (also built in)~~
+## Requirements
 
-Usage
----
-### Run Spotify at least once.
+- [Spotify Desktop App](https://www.spotify.com/)
+- [Node.js](https://nodejs.org/) and npm
+- Some way to run a command from the command line (Terminal.app, Xterm, iTerm2, xfce4-terminal, etc.)
 
-Use some VPN extension in your browser to sign up,
-If you don't have an account.
+## Usage
 
-### Install using npm
+In order for this to work, you need to have a spotify account (free).
+Use any VPN extension that offers a US server in your browser to create a Spotify account, If you don't have an account.
+
+Download the [Spotify Desktop App](https://www.spotify.com/us/download/).
+
+Install the Spotify Desktop App and run it at least once.
+
+Next, open a terminal emulator (Terminal.app, Xterm, iTerm2, xfce4-terminal, etc.) and run the following commands:
+
+### Install the script using _npm_
+
 ```bash
 npm install -g spotprox
 ```
 
-### Launch
+### Launch the script
+
 ```bash
 spotprox
 ```
 
-LICENSE
----
+The script will update the proxy settings for Spotify and Launch the desktop app, if a proxy server stops working simply quit Spotify and run the script again.
+
+## LICENSE
+
 MIT
