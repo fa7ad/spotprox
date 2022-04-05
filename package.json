@@ -1,6 +1,6 @@
 {
   "name": "spotprox",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Find proxy server for spotify",
   "type": "module",
   "main": "app.js",
